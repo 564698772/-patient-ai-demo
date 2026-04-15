@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: demo
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+
+dashscope:
+  api-key: ${DASHSCOPE_API_KEY}
+  timeout: 5000
+
+amap:
+  api-key: ${AMAP_API_KEY}
+  radius: 5000
+
+app:
+  cors:
+    # 允许的前端来源，支持多个（逗号分隔）
+    allowed-origins: ${FRONTEND_ORIGIN:http://localhost:5173,https://hwjhwjhwj.asia}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+
+logging:
+  level:
+    com.example.demo: DEBUG
+    org.springframework.web: INFO

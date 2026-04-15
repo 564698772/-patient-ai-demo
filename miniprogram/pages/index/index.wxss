@@ -1,0 +1,577 @@
+.page {
+  padding: 0 0 40rpx;
+}
+
+/* ===== SOS 横幅 ===== */
+.sos-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18rpx 32rpx;
+  background: #fef2f2;
+  border-bottom: 2rpx solid #fecaca;
+}
+
+.sos-tip {
+  font-size: 24rpx;
+  color: #7f1d1d;
+}
+
+.sos-btn {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 14rpx 28rpx;
+  background: #dc2626;
+  color: white;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 4rpx 16rpx rgba(220,38,38,0.4);
+  border: none;
+  /* 脉冲动画 */
+  animation: sos-pulse 2s ease-in-out infinite;
+}
+
+.sos-btn--hover {
+  background: #b91c1c;
+  transform: scale(0.97);
+}
+
+.sos-btn::after {
+  border: none;
+}
+
+.sos-icon {
+  font-size: 28rpx;
+}
+
+.sos-text {
+  font-size: 28rpx;
+  font-weight: 700;
+}
+
+@keyframes sos-pulse {
+  0%, 100% { box-shadow: 0 4rpx 16rpx rgba(220,38,38,0.4); }
+  50% { box-shadow: 0 4rpx 28rpx rgba(220,38,38,0.7); }
+}
+
+/* ===== 通用卡片 ===== */
+.card {
+  margin: 24rpx 24rpx 0;
+  padding: 36rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.07);
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 28rpx;
+}
+
+.title-emoji {
+  font-size: 36rpx;
+}
+
+.hospital-count {
+  margin-left: auto;
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #2563eb;
+  background: #eff6ff;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  border: 1rpx solid #dbeafe;
+}
+
+/* ===== 输入区域 ===== */
+.input-card {
+  margin-top: 24rpx;
+  border: 2rpx solid #dbeafe;
+}
+
+.quick-tags {
+  margin-bottom: 24rpx;
+}
+
+.tags-label {
+  font-size: 24rpx;
+  color: #6b7280;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.tag {
+  padding: 8rpx 24rpx;
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1rpx solid #dbeafe;
+  border-radius: 32rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.symptom-input {
+  width: 100%;
+  min-height: 160rpx;
+  padding: 24rpx;
+  background: #f9fafb;
+  border: 2rpx solid #e5e7eb;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  line-height: 1.65;
+  color: #111827;
+}
+
+.input-placeholder {
+  color: #9ca3af;
+}
+
+.char-count {
+  text-align: right;
+  margin-top: 8rpx;
+  margin-bottom: 24rpx;
+}
+
+.char-normal {
+  font-size: 22rpx;
+  color: #9ca3af;
+}
+
+.char-warn {
+  font-size: 22rpx;
+  color: #d97706;
+  font-weight: 600;
+}
+
+/* ===== 提交按钮 ===== */
+.submit-btn {
+  width: 100%;
+  padding: 28rpx;
+  background: #2563eb;
+  color: white;
+  border-radius: 16rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1;
+  border: none;
+}
+
+.submit-btn::after { border: none; }
+
+.submit-btn--hover {
+  background: #1d4ed8;
+}
+
+.submit-btn--loading {
+  background: #1d4ed8;
+  opacity: 0.85;
+}
+
+.submit-btn[disabled] {
+  opacity: 0.4;
+  background: #2563eb;
+}
+
+.btn-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+}
+
+/* ===== 加载步骤 ===== */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 32rpx;
+  padding: 12rpx 0;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  opacity: 0.35;
+}
+
+.step--active,
+.step--done {
+  opacity: 1;
+}
+
+.step-dot {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  background: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  flex-shrink: 0;
+  color: white;
+  font-weight: 700;
+}
+
+.step--done .step-dot {
+  background: #16a34a;
+}
+
+.step--active .step-dot {
+  background: #2563eb;
+}
+
+.step-label {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #111827;
+}
+
+.step--active .step-label {
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.spinner,
+.step-spinner {
+  width: 28rpx;
+  height: 28rpx;
+  border: 4rpx solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ===== 急症卡片 ===== */
+.emergency-card {
+  margin: 24rpx 24rpx 0;
+  padding: 36rpx;
+  background: #fef2f2;
+  border: 3rpx solid #dc2626;
+  border-radius: 24rpx;
+  display: flex;
+  gap: 24rpx;
+  align-items: flex-start;
+}
+
+.emergency-icon {
+  font-size: 56rpx;
+  flex-shrink: 0;
+}
+
+.emergency-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  flex: 1;
+}
+
+.emergency-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #dc2626;
+}
+
+.emergency-desc {
+  font-size: 26rpx;
+  color: #7f1d1d;
+  line-height: 1.5;
+}
+
+.emergency-call-btn {
+  padding: 20rpx 36rpx;
+  background: #dc2626;
+  color: white;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  font-weight: 700;
+  text-align: center;
+  border: none;
+  width: fit-content;
+  margin-top: 8rpx;
+}
+
+.emergency-call-btn::after { border: none; }
+
+/* ===== 分析结果 ===== */
+.dept-box {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 28rpx;
+  background: #eff6ff;
+  border-radius: 16rpx;
+  border: 1rpx solid #dbeafe;
+  margin-bottom: 24rpx;
+}
+
+.dept-label {
+  font-size: 26rpx;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+.dept-value {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.reason-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.reason-label {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.reason-text {
+  font-size: 26rpx;
+  color: #111827;
+  line-height: 1.65;
+  padding: 20rpx 24rpx;
+  background: #f9fafb;
+  border-radius: 12rpx;
+  border-left: 6rpx solid #dbeafe;
+}
+
+.fallback-box {
+  padding: 24rpx;
+  background: #fffbeb;
+  border-radius: 12rpx;
+  border: 1rpx solid #fde68a;
+}
+
+.fallback-text {
+  font-size: 26rpx;
+  color: #92400e;
+  line-height: 1.6;
+}
+
+/* ===== 医院列表 ===== */
+.hospital-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.hospital-item {
+  display: flex;
+  gap: 20rpx;
+  padding: 28rpx;
+  background: #f9fafb;
+  border-radius: 16rpx;
+  border: 1rpx solid #e5e7eb;
+  align-items: flex-start;
+}
+
+.hospital-rank {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 24rpx;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  text-align: center;
+  line-height: 48rpx;
+}
+
+.rank-first {
+  background: #2563eb;
+  color: white;
+}
+
+.hospital-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  min-width: 0;
+}
+
+.hospital-name {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.3;
+}
+
+.hospital-address {
+  font-size: 22rpx;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+.dept-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rpx;
+  margin-top: 4rpx;
+}
+
+.dept-tag {
+  padding: 4rpx 14rpx;
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1rpx solid #bbf7d0;
+  border-radius: 6rpx;
+  font-size: 20rpx;
+}
+
+.hospital-right {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12rpx;
+}
+
+.distance-value {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.distance-unit {
+  font-size: 22rpx;
+  color: #6b7280;
+}
+
+.nav-btn {
+  padding: 10rpx 24rpx;
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1rpx solid #dbeafe;
+  border-radius: 10rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ===== 空状态 ===== */
+.empty-hospitals {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16rpx;
+  padding: 60rpx 0;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+}
+
+.empty-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #111827;
+}
+
+.empty-desc {
+  font-size: 24rpx;
+  color: #6b7280;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* ===== 错误 ===== */
+.error-card {
+  display: flex;
+  gap: 20rpx;
+  align-items: flex-start;
+  background: #fef2f2;
+  border: 1rpx solid #fecaca;
+}
+
+.error-icon {
+  font-size: 44rpx;
+}
+
+.error-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  flex: 1;
+}
+
+.error-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #dc2626;
+}
+
+.error-msg {
+  font-size: 24rpx;
+  color: #7f1d1d;
+}
+
+.retry-btn {
+  padding: 16rpx 32rpx;
+  background: #dc2626;
+  color: white;
+  border-radius: 10rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+  width: fit-content;
+}
+
+.retry-btn::after { border: none; }
+
+/* ===== 重置按钮 ===== */
+.reset-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 24rpx 24rpx 0;
+  padding: 28rpx;
+  background: transparent;
+  color: #6b7280;
+  border: 2rpx solid #e5e7eb;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  text-align: center;
+}
+
+.reset-btn::after { border: none; }
+
+.reset-btn--hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+/* ===== 免责声明 ===== */
+.disclaimer {
+  padding: 32rpx 24rpx 0;
+  text-align: center;
+  font-size: 22rpx;
+  color: #9ca3af;
+  line-height: 1.6;
+}

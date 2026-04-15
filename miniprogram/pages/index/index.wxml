@@ -1,0 +1,192 @@
+<!-- 就医助手首页 -->
+<view class="page">
+
+  <!-- 顶部 SOS 横幅（常驻） -->
+  <view class="sos-banner">
+    <view class="sos-left">
+      <text class="sos-tip">遇到紧急情况请立即拨打急救</text>
+    </view>
+    <button class="sos-btn" bindtap="call120" hover-class="sos-btn--hover">
+      <text class="sos-icon">📞</text>
+      <text class="sos-text">拨打 120</text>
+    </button>
+  </view>
+
+  <!-- 输入卡片 -->
+  <view class="card input-card">
+    <view class="card-title">
+      <text class="title-emoji">🩺</text>
+      <text>描述您的症状</text>
+    </view>
+
+    <!-- 快捷标签 -->
+    <view class="quick-tags">
+      <text class="tags-label">常见症状：</text>
+      <view class="tags-row">
+        <view
+          class="tag"
+          wx:for="{{quickTags}}"
+          wx:key="*this"
+          bindtap="appendTag"
+          data-tag="{{item}}"
+        >{{item}}</view>
+      </view>
+    </view>
+
+    <!-- 输入框 -->
+    <textarea
+      class="symptom-input"
+      placeholder="例如：头痛发烧两天，体温38.5°C，伴有咽喉疼痛"
+      placeholder-class="input-placeholder"
+      value="{{symptoms}}"
+      bindinput="onSymptomsInput"
+      maxlength="500"
+      auto-height
+    />
+    <view class="char-count">
+      <text class="{{symptoms.length > 450 ? 'char-warn' : 'char-normal'}}">{{symptoms.length}}/500</text>
+    </view>
+
+    <!-- 提交按钮 -->
+    <button
+      class="submit-btn {{loading ? 'submit-btn--loading' : ''}}"
+      bindtap="handleSubmit"
+      disabled="{{loading || !symptoms.trim()}}"
+      hover-class="submit-btn--hover"
+    >
+      <view wx:if="{{loading}}" class="btn-loading">
+        <view class="spinner"></view>
+        <text>AI 分析中...</text>
+      </view>
+      <text wx:else>智能分析并推荐医院</text>
+    </button>
+  </view>
+
+  <!-- 加载进度 -->
+  <view class="card" wx:if="{{loading}}">
+    <view class="steps">
+      <view class="step {{loadStep > 0 ? 'step--done' : loadStep === 0 ? 'step--active' : ''}}">
+        <view class="step-dot">
+          <text wx:if="{{loadStep > 0}}">✓</text>
+          <view wx:elif="{{loadStep === 0}}" class="step-spinner"></view>
+        </view>
+        <text class="step-label">AI 分析症状</text>
+      </view>
+      <view class="step {{loadStep > 1 ? 'step--done' : loadStep === 1 ? 'step--active' : ''}}">
+        <view class="step-dot">
+          <text wx:if="{{loadStep > 1}}">✓</text>
+          <view wx:elif="{{loadStep === 1}}" class="step-spinner"></view>
+        </view>
+        <text class="step-label">匹配推荐科室</text>
+      </view>
+      <view class="step {{loadStep > 2 ? 'step--done' : loadStep === 2 ? 'step--active' : ''}}">
+        <view class="step-dot">
+          <text wx:if="{{loadStep > 2}}">✓</text>
+          <view wx:elif="{{loadStep === 2}}" class="step-spinner"></view>
+        </view>
+        <text class="step-label">搜索附近医院</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 急症警告 -->
+  <view class="emergency-card" wx:if="{{result && result.isEmergency}}">
+    <text class="emergency-icon">🚨</text>
+    <view class="emergency-body">
+      <text class="emergency-title">检测到急症症状！</text>
+      <text class="emergency-desc">您的症状可能需要紧急救治，请立即拨打120</text>
+      <button class="emergency-call-btn" bindtap="call120">立即拨打 120</button>
+    </view>
+  </view>
+
+  <!-- 分析结果 -->
+  <view class="card" wx:if="{{result && !loading}}">
+    <view class="card-title">
+      <text class="title-emoji">🏥</text>
+      <text>AI 分析结果</text>
+    </view>
+    <view wx:if="{{result.fallback}}" class="fallback-box">
+      <text class="fallback-text">{{result.fallbackMessage || 'AI分析暂时不可用，请前往最近医院就诊'}}</text>
+    </view>
+    <view wx:else>
+      <view class="dept-box">
+        <text class="dept-label">建议就诊科室</text>
+        <text class="dept-value">{{result.department}}</text>
+      </view>
+      <view class="reason-box" wx:if="{{result.reason}}">
+        <text class="reason-label">分析原因</text>
+        <text class="reason-text">{{result.reason}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 附近医院 -->
+  <view class="card" wx:if="{{hospitals.length > 0 && !loading}}">
+    <view class="card-title">
+      <text class="title-emoji">📍</text>
+      <text>附近医院推荐</text>
+      <text class="hospital-count">{{hospitals.length}}家</text>
+    </view>
+    <view class="hospital-list">
+      <view
+        class="hospital-item"
+        wx:for="{{hospitals}}"
+        wx:key="name"
+        bindtap="navigateToHospital"
+        data-hospital="{{item}}"
+      >
+        <view class="hospital-rank {{index === 0 ? 'rank-first' : ''}}">{{index + 1}}</view>
+        <view class="hospital-info">
+          <text class="hospital-name">{{item.name}}</text>
+          <text class="hospital-address">{{item.address || '地址暂无'}}</text>
+          <view class="dept-tags" wx:if="{{item.departments && item.departments.length}}">
+            <text
+              class="dept-tag"
+              wx:for="{{item.departments}}"
+              wx:for-item="dep"
+              wx:key="*this"
+            >{{dep}}</text>
+          </view>
+        </view>
+        <view class="hospital-right">
+          <text class="distance-value">{{item.distance >= 1000 ? (item.distance / 1000).toFixed(1) : item.distance}}</text>
+          <text class="distance-unit">{{item.distance >= 1000 ? 'km' : 'm'}}</text>
+          <view class="nav-btn">导航</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 无医院结果 -->
+  <view class="card" wx:if="{{result && !loading && hospitals.length === 0}}">
+    <view class="empty-hospitals">
+      <text class="empty-icon">🏥</text>
+      <text class="empty-title">未找到附近医院</text>
+      <text class="empty-desc">请扩大范围或手动搜索附近医院</text>
+    </view>
+  </view>
+
+  <!-- 重新查询 -->
+  <button
+    class="reset-btn"
+    wx:if="{{result && !loading}}"
+    bindtap="reset"
+    hover-class="reset-btn--hover"
+  >重新查询</button>
+
+  <!-- 错误提示 -->
+  <view class="card error-card" wx:if="{{error}}">
+    <text class="error-icon">❗</text>
+    <view class="error-body">
+      <text class="error-title">查询失败</text>
+      <text class="error-msg">{{error}}</text>
+      <button class="retry-btn" bindtap="handleSubmit">重试</button>
+    </view>
+  </view>
+
+  <!-- 底部免责声明 -->
+  <view class="disclaimer">
+    <text>本系统仅供参考，不构成医疗诊断。紧急情况请拨打 120</text>
+  </view>
+
+</view>

@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:www.npmjs.com)",
+      "Bash(./gradlew test:*)",
+      "Bash(where gradle:*)",
+      "Bash(./gradlew dependencies:*)",
+      "Bash(gradle --version)",
+      "Read(//c/Users/dd/Desktop/Java/bmadTest/bmadTest/demo/$USERPROFILE/.gradle/wrapper/dists/gradle-9.4.1-bin/**)",
+      "Bash(du -sh \"$USERPROFILE/.gradle/wrapper/dists/gradle-9.4.1-bin/arn2x92ynaizyzdaamcbpbhtj/gradle-9.4.1-bin.zip.part\")",
+      "Bash(timeout 30 ./gradlew --version)",
+      "Bash(powershell -Command \"Remove-Item -Recurse -Force frontend\")",
+      "Bash(npx create-vue@latest frontend --typescript --router --pinia --vitest --eslint --prettier --force)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(rm -f components/HelloWorld.vue components/TheWelcome.vue components/WelcomeItem.vue)",
+      "Bash(rm -rf components/icons)",
+      "Bash(rm -f components/__tests__/HelloWorld.spec.ts)",
+      "Bash(rmdir components/__tests__)",
+      "Bash(rm -f views/AboutView.vue)",
+      "Bash(SPRING_PROFILES_ACTIVE=local ./gradlew test)",
+      "Bash(xargs grep:*)",
+      "Bash(SPRING_PROFILES_ACTIVE=local ./gradlew test --tests \"com.example.demo.CorsPreflightMockMvcTest\" --info)",
+      "Bash(SPRING_PROFILES_ACTIVE=local ./gradlew test --tests \"com.example.demo.CorsPreflightMockMvcTest.testPreflightAllowsLocalhost\" --info)",
+      "Bash(SPRING_PROFILES_ACTIVE=local ./gradlew test --tests \"com.example.demo.CorsPreflightMockMvcTest\")",
+      "Bash(SPRING_PROFILES_ACTIVE=local ./gradlew test --tests \"com.example.demo.EmergencyDetectorTest\")",
+      "Bash(./gradlew compileJava)",
+      "Bash(./gradlew compileJava -Xlint:deprecation)",
+      "Bash(./gradlew compileJava --rerun-tasks)",
+      "Bash(./gradlew compileJava --rerun-tasks -x processResources)",
+      "Bash(./gradlew compileJava -Djava.tool.options=\"-Xlint:deprecation\" --rerun-tasks)",
+      "Bash(SPRING_PROFILES_ACTIVE=local ./gradlew test --rerun-tasks)",
+      "Bash(SPRING_PROFILES_ACTIVE=local ./gradlew test --rerun-tasks --info)",
+      "Bash(curl:*)",
+      "Bash(./gradlew bootJar)",
+      "Bash(mkdir:*)",
+      "Bash(nslookup:*)"
+    ]
+  }
+}

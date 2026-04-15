@@ -1,0 +1,60 @@
+<view class="page">
+
+  <!-- SOS 横幅 -->
+  <view class="sos-banner">
+    <text class="sos-tip">紧急情况请拨打急救</text>
+    <button class="sos-btn" bindtap="call120" hover-class="sos-btn--hover">
+      <text class="sos-icon">📞</text>
+      <text>拨打 120</text>
+    </button>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading-box" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">正在搜索附近医院...</text>
+  </view>
+
+  <!-- 位置未授权 -->
+  <view class="card tip-card" wx:elif="{{!hasLocation}}">
+    <text class="tip-icon">📍</text>
+    <text class="tip-text">需要获取您的位置才能搜索附近医院</text>
+    <button class="primary-btn" bindtap="requestLocation">授权位置</button>
+  </view>
+
+  <!-- 医院列表 -->
+  <view wx:elif="{{hospitals.length > 0}}">
+    <view class="list-header">
+      <text class="list-title">附近医院</text>
+      <text class="list-count">共 {{hospitals.length}} 家</text>
+    </view>
+    <view class="hospital-list">
+      <view
+        class="hospital-item"
+        wx:for="{{hospitals}}"
+        wx:key="name"
+        bindtap="openNavigation"
+        data-hospital="{{item}}"
+      >
+        <view class="rank {{index === 0 ? 'rank-first' : ''}}">{{index + 1}}</view>
+        <view class="info">
+          <text class="name">{{item.name}}</text>
+          <text class="addr">{{item.address || '地址暂无'}}</text>
+        </view>
+        <view class="right">
+          <text class="dist-val">{{item.distance >= 1000 ? (item.distance / 1000).toFixed(1) : item.distance}}</text>
+          <text class="dist-unit">{{item.distance >= 1000 ? 'km' : 'm'}}</text>
+          <text class="nav">导航 ›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空结果 -->
+  <view class="card empty-card" wx:elif="{{!loading && hasLocation}}">
+    <text class="empty-icon">🏥</text>
+    <text class="empty-title">附近暂无匹配医院</text>
+    <button class="primary-btn" bindtap="loadHospitals">重新搜索</button>
+  </view>
+
+</view>
