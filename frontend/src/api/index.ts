@@ -1,6 +1,6 @@
 import type { AnalysisRequest, AnalysisResponse, HospitalRequest, HospitalDto } from '../types'
 
-const BASE_URL = '/api'
+const BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? '') + '/api'
 
 async function post<T>(path: string, body: unknown): Promise<T> {
   const response = await fetch(`${BASE_URL}${path}`, {
